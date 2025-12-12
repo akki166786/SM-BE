@@ -56,3 +56,4 @@ prisma/dev.db-journal
 
 # Docker
 .dockerignore
+node_modules/
