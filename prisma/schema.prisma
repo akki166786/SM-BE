@@ -1,0 +1,67 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum MessageType {
+  text
+  image
+  video
+  gif
+  document
+  location
+}
+
+model User {
+  id            String   @id @default(uuid()) @db.Uuid
+  name          String?
+  email         String   @unique
+  username      String   @unique
+  password_hash String   @map("password_hash")
+  created_at    DateTime @default(now()) @map("created_at")
+
+  user1Conversations Conversation[] @relation("user1")
+  user2Conversations Conversation[] @relation("user2")
+  sentMessages       Message[]      @relation("sender")
+
+  @@index([username])
+  @@map("users")
+}
+
+model Conversation {
+  id         String   @id @default(uuid()) @db.Uuid
+  user1_id   String   @db.Uuid
+  user2_id   String   @db.Uuid
+  created_at DateTime @default(now()) @map("created_at")
+
+  user1    User      @relation("user1", fields: [user1_id], references: [id], onDelete: Cascade)
+  user2    User      @relation("user2", fields: [user2_id], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  @@unique([user1_id, user2_id], name: "unique_pair")
+  @@index([user1_id])
+  @@index([user2_id])
+  @@map("conversations")
+}
+
+model Message {
+  id              String      @id @default(uuid()) @db.Uuid
+  conversation_id String      @db.Uuid
+  sender_id       String      @db.Uuid
+  type            MessageType @default(text)
+  content         String
+  created_at      DateTime    @default(now()) @map("created_at")
+  is_read         Boolean     @default(false) @map("is_read")
+
+  conversation Conversation @relation(fields: [conversation_id], references: [id], onDelete: Cascade)
+  sender       User         @relation("sender", fields: [sender_id], references: [id], onDelete: Cascade)
+
+  @@index([conversation_id, created_at])
+  @@map("messages")
+}
+
