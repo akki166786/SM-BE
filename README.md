@@ -1,6 +1,13 @@
 # Secret Messenger
 
-A secure, real-time 1-on-1 messaging application built with modern web technologies.
+A secure, real-time 1-on-1 messaging application built with modern web technologies. There is nothing to download or install on mobile devices and therefore there are no notifications, there is no need to have to know the phonenumber because the chats are desgined to be only with usernames not with phone number or even with emails. 
+
+Upcoming functionalities:
+- Group chats
+- Files Sharing
+- Dark Mode
+- Themes 
+- Auto deleting functionalites.
 
 ## Features
 
