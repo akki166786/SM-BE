@@ -17,9 +17,9 @@ export async function verifyPassword(
 }
 
 export function generateToken(payload: JwtPayload): string {
-  return jwt.sign(payload, env.jwtSecret, {
+  return jwt.sign(payload as object, env.jwtSecret, {
     expiresIn: env.jwtExpiry,
-  });
+  } as jwt.SignOptions);
 }
 
 export function verifyToken(token: string): JwtPayload | null {
