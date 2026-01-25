@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "engines": {
-    "node": ">=18.0.0"
+    "node": "20.x"
   },
  "scripts": {
     "dev": "tsx watch src/index.ts",
@@ -15,9 +15,6 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix",
     "typecheck": "tsc --noEmit"
-  },
-  "engine": {
-    "node": "20.x"
   },
   "dependencies": {
     "@prisma/client": "^5.8.0",
@@ -40,7 +37,6 @@
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
     "eslint": "^8.56.0",
-    "prisma": "^5.8.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   }
