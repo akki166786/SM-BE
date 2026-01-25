@@ -54,6 +54,6 @@ app.use(errorHandler);
 setupSocketIO(httpServer);
 
 httpServer.listen(env.port, () => {
-  console.log(`✅ Server running on http://localhost:${env.port}`);
+  //console.log(`✅ Server running on http://localhost:${env.port}`);
   console.log(`🔌 WebSocket server ready`);
 });
